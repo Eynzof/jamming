@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import SearchResults from "../SearchResults/SearchResults";
 import SearchBar from "../SearchBar/SearchBar";
 import Playlist from "../Playlist/Playlist";
-
+import './App.css';
 
 type AppProps = {
     searchResults: any,
