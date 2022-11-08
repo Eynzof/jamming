@@ -6,12 +6,18 @@ import './App.css';
 
 type AppProps = {
     searchResults: any,
+    playListName: string,
+    playListTracks: any,
 }
 
 class App extends Component<{}, AppProps> {
     constructor(props: any) {
         super(props);
-        this.state = {searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}]};
+        this.state = {
+            searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}],
+            playListName: "My Playlist",
+            playListTracks: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}]
+        };
     }
 
     render() {
