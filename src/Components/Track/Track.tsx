@@ -2,17 +2,17 @@ import React, {Component} from 'react';
 import './Track.css'
 
 type TrackProps = {
-    track: Track;
+    track: {
+        name: string,
+        artist: string,
+        album: string,
+        id: string,
+    },
     isRemoval: boolean;
 }
 
-interface Track {
-    name: string,
-    artist: string,
-    album: string
-}
 
-class Track extends Component<TrackProps, {}> implements Track {
+class Track extends Component<TrackProps, {}> {
     renderAction() {
         if (this.props.isRemoval) {
             return <button className="Track-action">-</button>

@@ -5,7 +5,7 @@ import Playlist from "../Playlist/Playlist";
 import './App.css';
 
 type AppProps = {
-    searchResults: any,
+    searchResults: any;
     playListName: string,
     playListTracks: any,
 }
