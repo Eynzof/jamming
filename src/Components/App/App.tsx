@@ -13,9 +13,9 @@ type AppProps = {
 
 class App extends Component<{}, AppProps> {
     state = {
-        searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}],
+        searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: "1"}],
         playListName: "My Playlist",
-        playListTracks: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}]
+        playListTracks: [{name: "Timber", artist: "Kesha", album: "Die Young", id: "2"}]
     };
 
     // 这是一个修改state的方法，同时影响下属的所有组件: SearchResults, Playlist，所以要放在这里。
@@ -31,12 +31,9 @@ class App extends Component<{}, AppProps> {
     }
 
     removeTrack = (track: Track) => {
-        console.log(track);
-        console.log(this.state);
-        console.log(typeof this.state.playListTracks)
         if (track) {
-            this.state.playListTracks.filter(currentTrack => currentTrack.id !== track.id);
-            this.setState({playListTracks: this.state.playListTracks});
+            const result = this.state.playListTracks.filter(currentTrack => currentTrack.id !== track.id);
+            this.setState({playListTracks: result});
         } else {
             console.log("Track does not exist")
         }
