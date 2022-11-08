@@ -34,6 +34,19 @@ class App extends Component<{}, AppProps> {
         }
     }
 
+    removeTrack(track: Track) {
+        console.log(track);
+        console.log(this.state);
+        console.log(typeof this.state.playListTracks)
+        if (track) {
+            this.state.playListTracks.filter(currentTrack => currentTrack.id !== track.id);
+            this.setState({playListTracks: this.state.playListTracks});
+        } else {
+            console.log("Track does not exist")
+        }
+
+    }
+
     render() {
         return (
             <div>
@@ -42,7 +55,8 @@ class App extends Component<{}, AppProps> {
                     <SearchBar/>
                     <div className="App-playlist">
                         <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
-                        <Playlist playlistName={this.state.playListName} playlistTracks={this.state.playListTracks}/>
+                        <Playlist playlistName={this.state.playListName} playlistTracks={this.state.playListTracks}
+                                  onRemove={this.removeTrack}/>
                     </div>
                 </div>
             </div>

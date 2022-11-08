@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import './Track.css'
+import './TrackPage.css'
 
-type TrackProps = { track: Track; isRemoval: boolean; onAdd: any }
+type TrackProps = { track: Track; isRemoval: boolean; onAdd: any, onRemove: any }
 
 export interface Track {
     name: string,
@@ -22,6 +22,11 @@ class TrackPage extends Component<TrackProps, {}> {
     addTrack = () => {
         console.log('addTrack invoked')
         this.props.onAdd(this.props.track)
+    }
+
+    removeTrack = () => {
+        console.log('removeTrack invoked')
+        this.props.onRemove(this.props.track)
     }
 
     render() {

@@ -4,7 +4,8 @@ import TrackPage, {Track} from "../Track/TrackPage";
 
 type TrackListProps = {
     tracks: Track[],
-    onAdd: any,
+    onAdd?: any,
+    onRemove?: any,
     isRemoval: boolean,
 }
 
@@ -13,10 +14,10 @@ class TrackList extends Component<TrackListProps, {}> {
         return (
             <div className="TrackList">
                 {this.props.tracks.map((track: any) =>
-                  <TrackPage key={track.id} track={track} isRemoval={this.props.isRemoval} onAdd={this.props.onAdd}/>
+                    <TrackPage key={track.id} track={track} isRemoval={this.props.isRemoval} onAdd={this.props.onAdd}
+                               onRemove={this.props.onRemove}/>
                 )}
             </div>
-
         );
     }
 }
