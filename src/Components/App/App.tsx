@@ -11,7 +11,7 @@ type AppProps = {
 class App extends Component<{}, AppProps> {
     constructor(props: any) {
         super(props);
-        this.state = {searchResults: [{name: "", artist: "", album: "", id: ""}]};
+        this.state = {searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}]};
     }
 
     render() {

@@ -9,7 +9,7 @@
     padding: .5rem;
     font-size: 1.05rem;
     transition: color .25s;
-    border: 0px;
+    border: 0;
     background-color: rgba(0, 0, 0, 0);
     color: #fff;
 }
@@ -34,4 +34,5 @@
     font-size: .83rem;
     font-weight: 300;
     color: rgba(256, 256, 256, 0.8);
+    margin: 0;
 }
