@@ -12,11 +12,13 @@ export class Spotify {
     async search(term: string) {
         const endpoint = `https://api.spotify.com/v1/search?type=track&q=${term}&limit=20`;
         const token = await this.getAccessToken();
+        if(!token) {
+            console.log("token not found")
+        }
         const data = await fetch(endpoint, {
             headers: {Authorization: `Bearer ${token}`}
         })
         return data.json();
-
     }
 
     async getAccessToken() {
@@ -24,6 +26,12 @@ export class Spotify {
 
         if (this.TOKEN !== "") {
             console.log("Browser has token")
+            return this.TOKEN;
+        }
+
+        if(localStorage.getItem("token")) {
+            console.log("Local Storage has token")
+            this.TOKEN = localStorage.getItem("token")!;
             return this.TOKEN;
         }
         // Get access token from URL
@@ -38,6 +46,8 @@ export class Spotify {
                 console.log('2')
                 // TODO: 保存到本地Cookie
                 this.TOKEN = accessToken;
+                localStorage.setItem("token", accessToken);
+                console.log("token saved to localstorage")
                 window.setTimeout(() => this.TOKEN = "", expiresIn * 1000);
                 // @ts-ignore
                 // 这行干嘛用的？
