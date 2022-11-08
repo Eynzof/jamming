@@ -26,6 +26,7 @@ class App extends Component<{}, AppProps> {
     addTrack(track: Track) {
         // 已经添加过了
         if (this.state.playListTracks.find(currentTrack => currentTrack.id === track.id)) {
+            console.log("Track already added")
             return;
         } else {
             this.state.playListTracks.push(track);

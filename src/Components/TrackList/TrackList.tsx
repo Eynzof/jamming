@@ -13,7 +13,7 @@ class TrackList extends Component<TrackListProps, {}> {
         return (
             <div className="TrackList">
                 {this.props.tracks.map((track: any) =>
-                  <TrackPage track={track} isRemoval={this.props.isRemoval} onAdd={this.props.onAdd}/>
+                  <TrackPage key={track.id} track={track} isRemoval={this.props.isRemoval} onAdd={this.props.onAdd}/>
                 )}
             </div>
 
