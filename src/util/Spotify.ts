@@ -10,17 +10,12 @@ export class Spotify {
     }
 
     async search(term: string) {
-        const endpoint = `https://api.spotify.com/v1/search?type=track&q=${term}`;
-        await this.getAccessToken().then((token) => {
-            return fetch(endpoint, {
-                headers: {Authorization: `Bearer ${token}`}
-            }).then(response => {
-                const j = JSON.stringify(response);
-                console.log(j);
-                // 把 response 转换成 tracks
-
-            })
+        const endpoint = `https://api.spotify.com/v1/search?type=track&q=${term}&limit=20`;
+        const token = await this.getAccessToken();
+        const data = await fetch(endpoint, {
+            headers: {Authorization: `Bearer ${token}`}
         })
+        return data.json();
 
     }
 
@@ -41,6 +36,7 @@ export class Spotify {
             let expiresIn: number = Number(matchExpires[1]);
             if (accessToken && expiresIn) {
                 console.log('2')
+                // TODO: 保存到本地Cookie
                 this.TOKEN = accessToken;
                 window.setTimeout(() => this.TOKEN = "", expiresIn * 1000);
                 // @ts-ignore

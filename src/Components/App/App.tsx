@@ -50,9 +50,15 @@ class App extends Component<{}, AppProps> {
 
     search = (term: string) => {
         const spotify = new Spotify();
-        spotify.search(term).then(tracks => {
+        const tracks: Track[] = [];
+        spotify.search(term).then(data => {
+            console.log('data', data);
+            //@ts-ignore
+            data.tracks.items.forEach((item) => {
+                tracks.push({id:item.id, album:item.album.name, artist: item.artists[0].name, name: item.name});
+            })
             console.log(tracks);
-            // this.setState({searchResults: tracks});
+            this.setState({searchResults: tracks});
         })
     }
 
