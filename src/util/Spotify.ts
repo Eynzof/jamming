@@ -8,7 +8,7 @@ export class Spotify {
     constructor() {
         this.TOKEN = "";
         this.CLIENT_ID = "5d4c4c8f924e4d429cfd4c273e9dd256";
-        this.REDIRECT_URI = "http://localhost:3000/";
+        this.REDIRECT_URI = "https://enzo-jamming.surge.sh/";
     }
 
     async search(term: string) {
@@ -21,10 +21,18 @@ export class Spotify {
         await fetch(endpoint, {
             headers: {Authorization: `Bearer ${token}`}
         }).then(async response => {
-            const json = await response.json();
-            json.tracks.items.forEach((item: any) => {
-                tracks.push({id: item.id, album: item.album.name, artist: item.artists[0].name, name: item.name, uri:item.uri});
+            await response.json().then(data => {
+                data.tracks.items.forEach((item: any) => {
+                    tracks.push({
+                        id: item.id,
+                        album: item.album.name,
+                        artist: item.artists[0].name,
+                        name: item.name,
+                        uri: item.uri
+                    });
+                })
             })
+
         });
         return tracks;
     }
