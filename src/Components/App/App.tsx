@@ -37,7 +37,10 @@ class App extends Component<{}, AppProps> {
         } else {
             console.log("Track does not exist")
         }
+    }
 
+    updatePlaylistName = (name: string) => {
+        this.setState({playListName: name});
     }
 
     render() {
@@ -49,7 +52,7 @@ class App extends Component<{}, AppProps> {
                     <div className="App-playlist">
                         <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack}/>
                         <Playlist playlistName={this.state.playListName} playlistTracks={this.state.playListTracks}
-                                  onRemove={this.removeTrack}/>
+                                  onRemove={this.removeTrack} handleNameChange={this.updatePlaylistName}/>
                     </div>
                 </div>
             </div>
