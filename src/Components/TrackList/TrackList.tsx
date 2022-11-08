@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import './TrackList.css'
-import TrackPage from "../Track/TrackPage";
+import TrackPage, {Track} from "../Track/TrackPage";
 
 type TrackListProps = {
-    tracks: any,
+    tracks: Track[],
+    onAdd: any,
+    isRemoval: boolean,
 }
 
 class TrackList extends Component<TrackListProps, {}> {
     render() {
         return (
             <div className="TrackList">
-                {/* You will add a map method that renders a set of Track components */}
                 {this.props.tracks.map((track: any) =>
-                  <TrackPage track={track} isRemoval={false} />
+                  <TrackPage track={track} isRemoval={this.props.isRemoval} onAdd={this.props.onAdd}/>
                 )}
             </div>
 
