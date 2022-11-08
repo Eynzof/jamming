@@ -8,6 +8,7 @@ export interface Track {
     artist: string,
     album: string,
     id: string,
+    uri?: string,
 }
 
 class TrackPage extends Component<TrackProps, {}> {

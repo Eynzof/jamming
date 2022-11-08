@@ -1,3 +1,5 @@
+import {Track} from "../Components/Track/TrackPage";
+
 export class Spotify {
     TOKEN: string;
     CLIENT_ID: string;
@@ -12,13 +14,19 @@ export class Spotify {
     async search(term: string) {
         const endpoint = `https://api.spotify.com/v1/search?type=track&q=${term}&limit=20`;
         const token = await this.getAccessToken();
-        if(!token) {
+        if (!token) {
             console.log("token not found")
         }
-        const data = await fetch(endpoint, {
+        const tracks: Track[] = [];
+        await fetch(endpoint, {
             headers: {Authorization: `Bearer ${token}`}
-        })
-        return data.json();
+        }).then(async response => {
+            const json = await response.json();
+            json.tracks.items.forEach((item: any) => {
+                tracks.push({id: item.id, album: item.album.name, artist: item.artists[0].name, name: item.name, uri:item.uri});
+            })
+        });
+        return tracks;
     }
 
     async getAccessToken() {
@@ -29,7 +37,7 @@ export class Spotify {
             return this.TOKEN;
         }
 
-        if(localStorage.getItem("token")) {
+        if (localStorage.getItem("token")) {
             console.log("Local Storage has token")
             this.TOKEN = localStorage.getItem("token")!;
             return this.TOKEN;
