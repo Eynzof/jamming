@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import './TrackList.css'
-import Track from "../Track/Track";
+import TrackPage from "../Track/TrackPage";
 
 type TrackListProps = {
     tracks: any,
@@ -12,7 +12,7 @@ class TrackList extends Component<TrackListProps, {}> {
             <div className="TrackList">
                 {/* You will add a map method that renders a set of Track components */}
                 {this.props.tracks.map((track: any) =>
-                  <Track track={track} isRemoval={false} />
+                  <TrackPage track={track} isRemoval={false} />
                 )}
             </div>
 
