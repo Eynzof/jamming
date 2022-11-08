@@ -12,18 +12,14 @@ type AppProps = {
 }
 
 class App extends Component<{}, AppProps> {
-    constructor(props: AppProps) {
-        super(props);
-        this.state = {
-            searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}],
-            playListName: "My Playlist",
-            playListTracks: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}]
-        };
-        this.addTrack = this.addTrack.bind(this);
-    }
+    state = {
+        searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}],
+        playListName: "My Playlist",
+        playListTracks: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: ""}]
+    };
 
     // 这是一个修改state的方法，同时影响下属的所有组件: SearchResults, Playlist，所以要放在这里。
-    addTrack(track: Track) {
+    addTrack = (track: Track) => {
         // 已经添加过了
         if (this.state.playListTracks.find(currentTrack => currentTrack.id === track.id)) {
             console.log("Track already added")
@@ -34,7 +30,7 @@ class App extends Component<{}, AppProps> {
         }
     }
 
-    removeTrack(track: Track) {
+    removeTrack = (track: Track) => {
         console.log(track);
         console.log(this.state);
         console.log(typeof this.state.playListTracks)
