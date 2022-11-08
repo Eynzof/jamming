@@ -1,6 +1,20 @@
 const TOKEN = "";
-export const Spotify = () => {
-    const getAccessToken = () => {
+const CLIENT_ID = "5d4c4c8f924e4d429cfd4c273e9dd256";
+const REDIRECT_URI = "http://localhost:3000";
+export class Spotify {
+
+    static search = (term: string) => {
+        const endpoint = `https://api.spotify.com/v1/search?type=track&q=${term}`;
+        return fetch(endpoint,{
+            headers: {Authorization: `Bearer ${this.getAccessToken()}`}
+        }).then(response => {
+            const j = JSON.stringify(response);
+            console.log(j);
+            // 把 response 转换成 tracks
+
+        })
+    }
+    static getAccessToken = () => {
         if (TOKEN) {
             return TOKEN;
         } else {
@@ -17,7 +31,7 @@ export const Spotify = () => {
                     return accessToken;
                 } else {
                     // @ts-ignore
-                    window.location = 'https://accounts.spotify.com/authorize?client_id=CLIENT_ID&response_type=token&scope=playlist-modify-public&redirect_uri=http://localhost:3000';
+                    window.location = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&response_type=token&scope=playlist-modify-public&redirect_uri=${REDIRECT_URI}`;
                 }
             }
         }

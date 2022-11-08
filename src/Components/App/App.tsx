@@ -4,6 +4,7 @@ import SearchBar from "../SearchBar/SearchBar";
 import Playlist from "../Playlist/Playlist";
 import './App.css';
 import {Track} from "../Track/TrackPage";
+import {Spotify} from "../../util/Spotify";
 
 type AppProps = {
     searchResults: Track[];
@@ -48,7 +49,10 @@ class App extends Component<{}, AppProps> {
     }
 
     search = (term: string) => {
-        console.log(term);
+        Spotify.search(term).then(tracks => {
+            console.log(tracks);
+            // this.setState({searchResults: tracks});
+        })
     }
 
 
