@@ -3,11 +3,12 @@ import SearchResults from "../SearchResults/SearchResults";
 import SearchBar from "../SearchBar/SearchBar";
 import Playlist from "../Playlist/Playlist";
 import './App.css';
+import {Track} from "../Track/TrackPage";
 
 type AppProps = {
-    searchResults: any;
+    searchResults: Track[];
     playListName: string,
-    playListTracks: any,
+    playListTracks: Track[],
 }
 
 class App extends Component<{}, AppProps> {
@@ -20,6 +21,12 @@ class App extends Component<{}, AppProps> {
         };
     }
 
+    addTrack(track:Track) {
+        if (this.state.playListTracks.find(currentTrack => currentTrack.id === track.id)) {
+            return;
+        }
+    }
+
     render() {
         return (
             <div>
@@ -28,7 +35,7 @@ class App extends Component<{}, AppProps> {
                     <SearchBar/>
                     <div className="App-playlist">
                         <SearchResults searchResults={this.state.searchResults}/>
-                        <Playlist/>
+                        <Playlist playlistName={this.state.playListName} playlistTracks={this.state.playListTracks}/>
                     </div>
                 </div>
             </div>
