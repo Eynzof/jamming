@@ -49,7 +49,8 @@ class App extends Component<{}, AppProps> {
     }
 
     search = (term: string) => {
-        Spotify.search(term).then(tracks => {
+        const spotify = new Spotify();
+        spotify.search(term).then(tracks => {
             console.log(tracks);
             // this.setState({searchResults: tracks});
         })
