@@ -14,9 +14,11 @@ type AppProps = {
 
 class App extends Component<{}, AppProps> {
     state = {
-        searchResults: [{name: "Flubirds", artist: "Overhead", album: "Mr.Dog", id: "1"}],
+        searchResults: [{name: "Hello", artist: "Adele", album: "25", id: "1Yk0cQdMLx5RzzFTYwmuld", uri: "spotify:track:1Yk0cQdMLx5RzzFTYwmuld"}],
         playListName: "My Playlist",
-        playListTracks: [{name: "Timber", artist: "Kesha", album: "Die Young", id: "2"}]
+        playListTracks: [{
+            name: "Timber", artist: "Kesha", album: "Die Young", id: "2", uri: ""
+        }]
     };
 
     // 这是一个修改state的方法，同时影响下属的所有组件: SearchResults, Playlist，所以要放在这里。
@@ -26,6 +28,7 @@ class App extends Component<{}, AppProps> {
             console.log("Track already added")
             return;
         } else {
+            // @ts-ignore
             this.state.playListTracks.push(track);
             this.setState({playListTracks: this.state.playListTracks});
         }
@@ -45,12 +48,14 @@ class App extends Component<{}, AppProps> {
     }
 
     savePlaylist = () => {
-        // const trackURIs = this.state.playListTracks.map(track => track.uri);
+        const spotify = new Spotify();
+        const trackURIs = this.state.playListTracks.map(track => track.uri);
+        spotify.savePlayList(this.state.playListName, trackURIs)
     }
+
 
     search = (term: string) => {
         const spotify = new Spotify();
-
         spotify.search(term).then(data => {
             this.setState({searchResults: data});
         })

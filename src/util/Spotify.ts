@@ -4,11 +4,14 @@ export class Spotify {
     TOKEN: string;
     CLIENT_ID: string;
     REDIRECT_URI: string;
+    UID: string;
 
     constructor() {
         this.TOKEN = "";
+        this.UID = "";
         this.CLIENT_ID = "5d4c4c8f924e4d429cfd4c273e9dd256";
-        this.REDIRECT_URI = "https://enzo-jamming.surge.sh/";
+        // this.REDIRECT_URI = "https://enzo-jamming.surge.sh/";
+        this.REDIRECT_URI = "http://localhost:3000/";
     }
 
     async search(term: string) {
@@ -35,6 +38,49 @@ export class Spotify {
 
         });
         return tracks;
+    }
+
+    async savePlayList(playListName: string, uris?: string[]) {
+        // if (!playListName || !uris) {
+        //     console.log("playlist name or uris is empty")
+        //     return;
+        // }
+        const token = await this.getAccessToken();
+        if (!token) {
+            console.log("token not found")
+        }
+        if (!this.UID || this.UID === "") {
+            const endpoint = 'https://api.spotify.com/v1/me';
+
+            await fetch(endpoint, {
+                headers: {Authorization: `Bearer ${token}`}
+            }).then(async response => {
+                await response.json().then(data => {
+                    this.UID = data.id;
+                })
+            })
+        }
+
+        // 创建 playlist
+        const endpoint = `https://api.spotify.com/v1/users/${this.UID}/playlists`;
+
+        const data = await fetch(endpoint, {
+            method: 'POST',
+            headers: {Authorization: `Bearer ${token}`},
+            body: JSON.stringify({name: playListName})
+        })
+        const playlistID = data.json().then(json => json.id);
+
+        const addtrack_endpoint = `https://api.spotify.com/v1/users/${this.UID}/playlists/${playlistID}/tracks`
+
+        const r = await fetch(addtrack_endpoint,  {
+            method: 'POST',
+            headers: {Authorization: `Bearer ${token}`},
+            body: "t"
+        })
+
+
+
     }
 
     async getAccessToken() {
