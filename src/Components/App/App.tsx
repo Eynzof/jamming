@@ -17,7 +17,7 @@ class App extends Component<{}, AppProps> {
         searchResults: [{name: "Hello", artist: "Adele", album: "25", id: "1Yk0cQdMLx5RzzFTYwmuld", uri: "spotify:track:1Yk0cQdMLx5RzzFTYwmuld"}],
         playListName: "My Playlist",
         playListTracks: [{
-            name: "Timber", artist: "Kesha", album: "Die Young", id: "2", uri: ""
+            name: "Timber (feat. Ke$ha)", artist: "Pitbull", album: "Global Warming: Meltdown (Deluxe Version)", id: "3cHyrEgdyYRjgJKSOiOtcS", uri: "spotify:track:3cHyrEgdyYRjgJKSOiOtcS"
         }]
     };
 

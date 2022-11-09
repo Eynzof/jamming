@@ -64,24 +64,36 @@ export class Spotify {
         // 创建 playlist
         const endpoint = `https://api.spotify.com/v1/users/${this.UID}/playlists`;
 
-        const data = await fetch(endpoint, {
+        let playlistId = "";
+
+        console.log("uris:", uris);
+
+        fetch(endpoint, {
             method: 'POST',
             headers: {Authorization: `Bearer ${token}`},
             body: JSON.stringify({name: playListName})
+        }).then(async response => {
+            await response.json().then(data => {
+                playlistId = data.id;
+            })
+
+            const addtrack_endpoint = `https://api.spotify.com/v1/users/${this.UID}/playlists/${playlistId}/tracks`
+
+            fetch(addtrack_endpoint, {
+                method: 'POST',
+                headers: {Authorization: `Bearer ${token}`},
+
+                body: JSON.stringify({"uris": uris})
+            }).then(async response => {
+                await response.json().then(data => {
+                    console.log(data);
+                    console.log("playlist created")
+                })
+            })
+
         })
-        const playlistID = data.json().then(json => json.id);
-
-        const addtrack_endpoint = `https://api.spotify.com/v1/users/${this.UID}/playlists/${playlistID}/tracks`
-
-        const r = await fetch(addtrack_endpoint,  {
-            method: 'POST',
-            headers: {Authorization: `Bearer ${token}`},
-            body: "t"
-        })
-
-
-
     }
+
 
     async getAccessToken() {
         console.log("getAccessToken Invoked")
