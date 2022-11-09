@@ -10,8 +10,8 @@ export class Spotify {
         this.TOKEN = "";
         this.UID = "";
         this.CLIENT_ID = "5d4c4c8f924e4d429cfd4c273e9dd256";
-        // this.REDIRECT_URI = "https://enzo-jamming.surge.sh/";
-        this.REDIRECT_URI = "http://localhost:3000/";
+        this.REDIRECT_URI = "https://enzo-jamming.surge.sh/";
+        // this.REDIRECT_URI = "http://localhost:3000/";
     }
 
     async search(term: string) {
